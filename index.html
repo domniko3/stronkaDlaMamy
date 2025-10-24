@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Moja Statyczna Strona - Strona Główna</title>
+    <meta name="description"
+          content="Prosta, statyczna strona HTML z zakładkami: Strona tytułowa, O mnie i Kontakt. Gotowa na GitHub Pages.">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <style>
+        :root{
+          --bg:#0f1724;
+          --card:rgba(15,23,36,0.8);
+          --muted:#d0d4db;
+          --accent:#56b6f6;
+          --glass: rgba(0,0,0,0.3);
+          --radius:14px;
+          font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        *{box-sizing:border-box}
+
+        html, body {
+          height: 100%;
+          margin: 0;
+          background: url('background.jpg') no-repeat center center fixed;
+          background-size: cover;
+          color: #f0f0f0;
+        }
+        body::before {
+          content: "";
+          position: fixed;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background: rgba(0,0,0,0.9);
+          z-index: -1;
+        }
+
+        header{backdrop-filter: blur(6px);position:sticky;top:0;z-index:50}
+        .navwrap{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:20px}
+        .brand{display:flex;align-items:center;gap:12px}
+        .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7ce3ff);display:flex;align-items:center;justify-content:center;color:#042029;font-weight:700}
+        .nav{margin-left:auto;display:flex;gap:12px}
+        .nav a{color:#f0f0f0;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600;background:var(--glass)}
+        .nav a:hover{color:#fff;background:rgba(0,0,0,0.5)}
+
+        .hero {
+          max-width: 1100px;
+          margin: 36px auto;
+          padding: 40px 20px;
+          display: block;
+        }
+
+        .card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:0 6px 30px rgba(0,0,0,0.7)}
+        .title{font-size:28px;margin:6px 0 12px;color:#ffffff}
+        .subtitle{color:var(--muted);margin-bottom:18px}
+        .cta{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#042029;font-weight:700;text-decoration:none}
+        section{max-width:1100px;margin:18px auto;padding:20px}
+        h2{margin:0 0 12px;color:#ffffff}
+        p.lead{color:var(--muted);line-height:1.6}
+
+        /* Contact form */
+        form{display:grid;gap:10px}
+        input[type=text],input[type=email],textarea{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.2);padding:10px;border-radius:10px;color:#f0f0f0}
+        textarea{min-height:120px;resize:vertical}
+        button{padding:10px 14px;border-radius:10px;border:0;background:var(--accent);font-weight:700;color:#042029;cursor:pointer}
+
+        footer{max-width:1100px;margin:24px auto;padding:20px;color:var(--muted)}
+
+        @media (max-width:880px){
+          .grid{grid-template-columns:repeat(2,1fr)}
+        }
+        @media (max-width:560px){
+          .nav{display:none}
+          .navwrap{justify-content:space-between}
+          .grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="navwrap">
+        <div class="brand">
+            <div class="logo">MG</div>
+            <div>
+                <div style="font-weight:800;color:#ffffff">Chcemy to? Jakies logo?</div>
+            </div>
+        </div>
+        <nav class="nav" aria-label="Główne menu">
+            <a href="#home">Strona główna</a>
+            <a href="#about">O mnie</a>
+            <a href="#contact">Kontakt</a>
+        </nav>
+        <button onclick="toggleMenu()" aria-label="Pokaż menu" style="display:none">☰</button>
+    </div>
+</header>
+
+<main>
+    <section id="home" class="card">
+        <h1 class="title">Witaj na mojej statycznej stronie</h1>
+        <p class="subtitle">Prosty, czytelny layout z kilkoma zakładkami i sekcją Kontakt. Idealny do hostowania na
+            GitHub Pages (plik: <code>index.html</code>).</p>
+        <p class="lead">Ta strona to pojedynczy plik HTML — wszystko w nim jest statyczne. Możesz sklonować,
+            edytować i wysłać na GitHub, by opublikować.</p>
+        <p style="margin-top:18px"><a class="cta" href="#contact">Napisz do mnie</a></p>
+    </section>
+
+    <section id="about" class="card">
+        <h2>O mnie</h2>
+        <p class="lead">Kilka zdań o autorze — co robisz, czego się uczysz, jakie masz zainteresowania. To miejsce można
+            łatwo zaktualizować, dodać zdjęcie lub link do profilu GitHub.</p>
+        <p>Przykładowe punkty:</p>
+        <ul>
+            <li>Frontend: HTML, CSS, proste JavaScript</li>
+            <li>Projekty demonstracyjne hostowane na GitHub Pages</li>
+            <li>Otwartość na współpracę i feedback</li>
+        </ul>
+    </section>
+
+    <section id="contact" class="card">
+        <h2>Kontakt</h2>
+        <p class="lead">Masz pytanie lub chcesz się skontaktować? Wypełnij formularz poniżej lub użyj bezpośredniego
+            adresu e‑mail.</p>
+
+        <form id="contactForm" onsubmit="handleContact(event)">
+            <label for="name">Imię i nazwisko</label>
+            <input id="name" name="name" type="text" placeholder="Jan Kowalski" required>
+
+            <label for="email">Adres e‑mail</label>
+            <input id="email" name="email" type="email" placeholder="twoj@mail.pl" required>
+
+            <label for="message">Wiadomość</label>
+            <textarea id="message" name="message" placeholder="Napisz wiadomość..." required></textarea>
+
+            <div style="display:flex;gap:10px;align-items:center">
+                <button type="submit">Wyślij</button>
+                <div id="status" style="color:var(--muted);font-size:14px"></div>
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <div>© "Twoje Imię" — statyczna strona HTML • Gotowa na GitHub Pages</div>
+</footer>
+
+<script>
+    function handleContact(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      const status = document.getElementById('status');
+      if(!name||!email||!msg){status.textContent='Uzupełnij wszystkie pola.';return}
+      const subject = encodeURIComponent('Wiadomość od ' + name);
+      const body = encodeURIComponent('Imię: '+name+'\nEmail: '+email+'\n\n'+msg);
+      const mailto = `mailto:twoj@mail.pl?subject=${subject}&body=${body}`;
+      window.location.href = mailto;
+      status.textContent='Otwieram klienta poczty...';
+      setTimeout(()=>{status.textContent='Jeśli klient poczty się nie otworzył, użyj adresu twoj@mail.pl'},1500);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const href = a.getAttribute('href');
+        if(href.length>1){
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({behavior:'smooth'});
+        }
+      })
+    });
+</script>
+</body>
+</html>
